@@ -96,7 +96,7 @@ export default function EventDetail() {
                   {event.category.toUpperCase()}
                 </span>
                 <span className="badge" style={{ backgroundColor: 'var(--surface-1)', color: 'var(--ink)', fontSize: '0.75rem', fontWeight: 600, padding: '4px 8px', borderRadius: '4px', border: '1px solid var(--hairline)' }}>
-                  SDG 11: Sustainable Culture
+                  Warisan Budaya Madura
                 </span>
               </div>
 

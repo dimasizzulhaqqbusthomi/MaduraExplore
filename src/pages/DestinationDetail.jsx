@@ -72,7 +72,7 @@ export default function DestinationDetail() {
       </div>
 
       {/* Main Details Section */}
-      <div className="container py-8" style={{ padding: '3rem 0' }}>
+      <div className="container py-8" style={{ paddingTop: '3rem', paddingBottom: '3rem' }}>
         <div className="grid md:grid-cols-3 gap-8">
           {/* Main Left Content */}
           <div className="md:col-span-2">
@@ -250,13 +250,15 @@ export default function DestinationDetail() {
                   {isFav ? 'Hapus dari Favorit' : 'Simpan ke Favorit'}
                 </button>
                 
-                <Link 
-                  to={`/maps?lat=${dest.lat}&lng=${dest.lng}`}
+                <a 
+                  href={`https://www.google.com/maps?q=${dest.lat},${dest.lng}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="btn btn-ghost w-full"
                   style={{ border: '1px solid var(--hairline)', justifyContent: 'center', gap: '6px', borderRadius: '4px', backgroundColor: 'var(--canvas)' }}
                 >
                   <Map size={16} /> Lihat Rute di Peta
-                </Link>
+                </a>
               </div>
             </div>
           </div>

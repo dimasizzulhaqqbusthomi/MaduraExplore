@@ -239,12 +239,21 @@ export default function Maps() {
                 >
                   Buka Detail
                 </Link>
+                <a
+                  href={`https://www.google.com/maps?q=${selectedLocation.lat},${selectedLocation.lng}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-ghost"
+                  style={{ flex: 1, border: '1px solid var(--primary)', color: 'var(--primary)', fontSize: '0.75rem', padding: '8px', justifyContent: 'center', borderRadius: '4px', backgroundColor: 'white', textDecoration: 'none' }}
+                >
+                  🗺️ Google Maps
+                </a>
                 <button
                   onClick={() => setSelectedLocation({ name: 'Pulau Madura', lat: -7.1068, lng: 113.4862, zoom: 9 })}
                   className="btn btn-ghost"
                   style={{ border: '1px solid var(--hairline)', fontSize: '0.75rem', padding: '8px', justifyContent: 'center', borderRadius: '4px', backgroundColor: 'white' }}
                 >
-                  Tutup
+                  ✕
                 </button>
               </div>
             </div>
