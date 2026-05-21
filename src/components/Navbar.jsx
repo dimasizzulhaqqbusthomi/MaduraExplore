@@ -11,6 +11,7 @@ export default function Navbar() {
     { name: 'Destinasi', path: '/explore' },
     { name: 'Kuliner', path: '/culinary' },
     { name: 'UMKM', path: '/msme' },
+    { name: 'Penginapan', path: '/accommodations' },
     { name: 'Festival', path: '/events' },
     { name: 'Peta', path: '/maps' },
     { name: 'Trip Planner', path: '/planner' },

@@ -150,8 +150,8 @@ export default function Events() {
 
                   <h2 style={{ fontSize: '1.25rem', fontWeight: 600, margin: '4px 0 8px 0', color: 'var(--ink)' }}>{event.name}</h2>
                   
-                  <p style={{ color: 'var(--ink-muted)', display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '12px', fontSize: '0.8rem' }}>
-                    <MapPin size={12} /> {event.location}
+                  <p style={{ color: 'var(--ink-muted)', marginBottom: '12px', fontSize: '0.8rem' }}>
+                    {event.location}
                   </p>
                   
                   <p style={{ fontSize: '0.875rem', marginBottom: '1.5rem', color: 'var(--ink-muted)', lineHeight: '1.5', letterSpacing: '0.16px' }}>
@@ -161,7 +161,7 @@ export default function Events() {
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto' }}>
                     {event.relatedDestination && (
                       <span style={{ fontSize: '0.75rem', color: 'var(--ink-muted)' }}>
-                        📍 Terkait: <strong>{event.relatedDestination}</strong>
+                        Terkait: <strong>{event.relatedDestination}</strong>
                       </span>
                     )}
                     <Link 
@@ -169,7 +169,7 @@ export default function Events() {
                       className="btn btn-ghost" 
                       style={{ padding: '0', display: 'flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.9rem', color: 'var(--primary)', textDecoration: 'none', marginLeft: 'auto' }}
                     >
-                      Lihat Acara <ArrowRight size={16} />
+                      Lihat Acara
                     </Link>
                   </div>
                 </div>

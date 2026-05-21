@@ -71,8 +71,8 @@ export function DestinationCard({ item }) {
 
       <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-          <span style={{ fontSize: '0.8rem', color: 'var(--ink-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-            <MapPin size={12} /> {item.location}
+          <span style={{ fontSize: '0.8rem', color: 'var(--ink-muted)' }}>
+            {item.location}
           </span>
           <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--ink)', display: 'flex', alignItems: 'center', gap: '2px' }}>
             ⭐ {item.rating.toFixed(1)}
@@ -167,8 +167,8 @@ export function MSMECard({ item }) {
 
       <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-          <span style={{ fontSize: '0.8rem', color: 'var(--ink-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-            <MapPin size={12} /> {item.location}
+          <span style={{ fontSize: '0.8rem', color: 'var(--ink-muted)' }}>
+            {item.location}
           </span>
           <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--ink)', display: 'flex', alignItems: 'center', gap: '2px' }}>
             ⭐ {item.rating.toFixed(1)}
@@ -180,7 +180,7 @@ export function MSMECard({ item }) {
         </h3>
         
         <div style={{ fontSize: '0.8rem', color: 'var(--primary)', fontWeight: 600, marginBottom: '8px' }}>
-          📦 {item.product}
+          {item.product}
         </div>
 
         <p style={{ fontSize: '0.85rem', color: 'var(--ink-muted)', margin: '0 0 16px 0', flexGrow: 1, lineHeight: '1.4' }}>
@@ -265,11 +265,11 @@ export function EventCard({ item }) {
 
       <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-          <span style={{ fontSize: '0.8rem', color: 'var(--ink-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-            <Calendar size={12} /> {item.date}
+          <span style={{ fontSize: '0.8rem', color: 'var(--ink-muted)' }}>
+            {item.date}
           </span>
-          <span style={{ fontSize: '0.8rem', color: 'var(--ink-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-            <MapPin size={12} /> {item.location.split(',')[1] || item.location}
+          <span style={{ fontSize: '0.8rem', color: 'var(--ink-muted)' }}>
+            {item.location.split(',')[1] || item.location}
           </span>
         </div>
 
@@ -359,8 +359,8 @@ export function CulinaryCard({ item }) {
 
       <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-          <span style={{ fontSize: '0.8rem', color: 'var(--ink-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-            <MapPin size={12} /> {item.location}
+          <span style={{ fontSize: '0.8rem', color: 'var(--ink-muted)' }}>
+            {item.location}
           </span>
           <span style={{ fontSize: '0.8rem', fontWeight: 600, color: 'var(--ink)', display: 'flex', alignItems: 'center', gap: '2px' }}>
             ⭐ {item.rating.toFixed(1)}
@@ -372,7 +372,7 @@ export function CulinaryCard({ item }) {
         </h3>
 
         <div style={{ fontSize: '0.8rem', color: 'var(--ink-muted)', marginBottom: '8px' }}>
-          💰 {item.priceRange}
+          {item.priceRange}
         </div>
 
         <p style={{ fontSize: '0.85rem', color: 'var(--ink-muted)', margin: '0 0 16px 0', flexGrow: 1, lineHeight: '1.4' }}>
@@ -390,3 +390,131 @@ export function CulinaryCard({ item }) {
     </div>
   );
 }
+
+// Accommodation Card
+export function AccommodationCard({ item }) {
+  const { toggleFavorite, isFavorite } = useContext(AppContext);
+  const isFav = isFavorite(item.id, 'accommodation');
+
+  const starColors = { 2: '#6b7280', 3: '#f59e0b', 4: '#3b82f6', 5: '#8b5cf6' };
+
+  return (
+    <div 
+      className="card" 
+      style={{ 
+        display: 'flex', 
+        flexDirection: 'column', 
+        border: '1px solid var(--hairline)', 
+        backgroundColor: 'var(--canvas)', 
+        borderRadius: '8px', 
+        overflow: 'hidden',
+        height: '100%',
+        transition: 'box-shadow 0.2s ease, transform 0.2s ease'
+      }}
+      onMouseEnter={e => { 
+        e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.10)'; 
+        e.currentTarget.style.transform = 'translateY(-2px)'; 
+      }}
+      onMouseLeave={e => { 
+        e.currentTarget.style.boxShadow = 'none'; 
+        e.currentTarget.style.transform = 'none'; 
+      }}
+    >
+      <div style={{ position: 'relative', height: '190px', width: '100%' }}>
+        <img 
+          src={item.image} 
+          alt={item.name} 
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+        />
+        
+        {/* Star Badge */}
+        <div style={{ position: 'absolute', top: '10px', left: '10px' }}>
+          <span style={{
+            display: 'inline-flex', alignItems: 'center', gap: '3px',
+            backgroundColor: starColors[item.stars] || '#6b7280',
+            color: 'white', fontSize: '0.72rem', fontWeight: 700,
+            padding: '3px 8px', borderRadius: '2px'
+          }}>
+            {'★'.repeat(item.stars)}
+          </span>
+        </div>
+
+        {/* Favorite Heart Button */}
+        <button 
+          onClick={(e) => {
+            e.preventDefault();
+            toggleFavorite(item.id, 'accommodation');
+          }}
+          style={{ 
+            position: 'absolute', 
+            top: '10px', 
+            right: '10px', 
+            background: 'rgba(255, 255, 255, 0.9)', 
+            border: 'none', 
+            borderRadius: '50%', 
+            width: '32px', 
+            height: '32px', 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            cursor: 'pointer',
+            boxShadow: '0 2px 5px rgba(0,0,0,0.15)',
+            zIndex: 10
+          }}
+          title={isFav ? "Hapus dari Favorit" : "Simpan ke Favorit"}
+        >
+          <Heart size={16} fill={isFav ? 'var(--semantic-error)' : 'none'} stroke={isFav ? 'var(--semantic-error)' : '#161616'} />
+        </button>
+
+        {/* Rating Badge */}
+        <div style={{
+          position: 'absolute', bottom: '10px', right: '10px',
+          background: 'rgba(0,0,0,0.65)', color: 'white',
+          fontSize: '0.8rem', fontWeight: 700, padding: '4px 10px', borderRadius: '4px',
+          display: 'flex', alignItems: 'center', gap: '4px'
+        }}>
+          <Star size={12} fill="white" /> {item.rating.toFixed(1)}
+        </div>
+      </div>
+
+      <div style={{ padding: '16px', flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+        <h3 style={{ fontSize: '1.05rem', fontWeight: 600, margin: '0 0 6px 0', color: 'var(--ink)', lineHeight: 1.3 }}>
+          {item.name}
+        </h3>
+        
+        <p style={{ fontSize: '0.78rem', color: 'var(--ink-muted)', margin: '0 0 4px 0' }}>
+          {item.location}
+        </p>
+        
+        <p style={{ fontSize: '0.8rem', color: 'var(--primary)', fontWeight: 600, margin: '0 0 10px 0' }}>
+          {item.pricePerNight} / malam
+        </p>
+
+        {/* Facilities chips */}
+        <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '14px' }}>
+          {item.facilities.slice(0, 4).map(f => (
+            <span key={f} style={{
+              fontSize: '0.7rem', padding: '2px 8px',
+              border: '1px solid var(--hairline)', borderRadius: '20px',
+              color: 'var(--ink-muted)', backgroundColor: 'var(--surface-1)'
+            }}>{f}</span>
+          ))}
+          {item.facilities.length > 4 && (
+            <span style={{ fontSize: '0.7rem', padding: '2px 8px', border: '1px solid var(--hairline)', borderRadius: '20px', color: 'var(--ink-muted)' }}>
+              +{item.facilities.length - 4} lainnya
+            </span>
+          )}
+        </div>
+
+        <Link 
+          to={`/accommodations/${item.id}`} 
+          className="btn btn-primary" 
+          style={{ width: '100%', textAlign: 'center', justifyContent: 'center', padding: '10px', borderRadius: '4px', marginTop: 'auto', fontSize: '0.875rem' }}
+        >
+          Lihat Detail
+        </Link>
+      </div>
+    </div>
+  );
+}
+

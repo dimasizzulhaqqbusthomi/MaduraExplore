@@ -22,6 +22,7 @@ export default function Footer() {
               <Link to="/explore" className="block mb-2 hover:text-white">Destinasi Wisata</Link>
               <Link to="/culinary" className="block mb-2 hover:text-white">Kuliner Khas</Link>
               <Link to="/msme" className="block mb-2 hover:text-white">UMKM Lokal</Link>
+              <Link to="/accommodations" className="block mb-2 hover:text-white">Penginapan</Link>
               <Link to="/events" className="block mb-2 hover:text-white">Festival Budaya</Link>
               <Link to="/planner" className="block mb-2 hover:text-white">Trip Planner</Link>
             </div>

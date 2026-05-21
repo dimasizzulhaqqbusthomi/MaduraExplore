@@ -5,7 +5,7 @@ import { AppContext } from '../context/AppContext';
 
 export default function DestinationDetail() {
   const { id } = useParams();
-  const { destinations, msmes, events, culinaries, toggleFavorite, isFavorite, addToItinerary } = useContext(AppContext);
+  const { destinations, msmes, events, culinaries, accommodations, toggleFavorite, isFavorite, addToItinerary } = useContext(AppContext);
   
   const dest = destinations.find(d => d.id === parseInt(id));
   const [activeDay, setActiveDay] = useState(1);
@@ -65,7 +65,7 @@ export default function DestinationDetail() {
               {dest.name}
             </h1>
             <p className="text-white flex items-center gap-2 text-sm" style={{ color: 'white', display: 'flex', alignItems: 'center', gap: '0.5rem', opacity: 0.95 }}>
-              <MapPin size={16} /> {dest.address}
+              <MapPin size={16} /> {dest.address || dest.location}
             </p>
           </div>
         </div>
@@ -140,7 +140,7 @@ export default function DestinationDetail() {
                       <img src={cul.image} alt={cul.name} style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '4px' }} />
                       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                         <h4 style={{ margin: '0 0 4px 0', fontSize: '0.95rem', fontWeight: 600 }}>{cul.name}</h4>
-                        <span style={{ fontSize: '0.75rem', color: 'var(--semantic-success)', fontWeight: 600 }}>🍽️ Khas {cul.location}</span>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--semantic-success)', fontWeight: 600 }}>Khas {cul.location}</span>
                       </div>
                     </Link>
                   ))}
@@ -161,7 +161,7 @@ export default function DestinationDetail() {
                       <img src={msme.image} alt={msme.name} style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '4px' }} />
                       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                         <h4 style={{ margin: '0 0 4px 0', fontSize: '0.95rem', fontWeight: 600 }}>{msme.name}</h4>
-                        <span style={{ fontSize: '0.75rem', color: 'var(--primary)', fontWeight: 600 }}>📦 {msme.product}</span>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--primary)', fontWeight: 600 }}>{msme.product}</span>
                       </div>
                     </Link>
                   ))}
@@ -185,13 +185,39 @@ export default function DestinationDetail() {
                       </div>
                       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                         <h4 style={{ margin: '0 0 4px 0', fontSize: '0.95rem', fontWeight: 600 }}>{event.name}</h4>
-                        <span style={{ fontSize: '0.75rem', color: 'var(--semantic-error)', fontWeight: 600 }}>📅 {event.category}</span>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--semantic-error)', fontWeight: 600 }}>{event.category}</span>
                       </div>
                     </Link>
                   ))}
                 </div>
               </section>
             )}
+
+            {/* Nearby Accommodations */}
+            <section style={{ marginBottom: '2.5rem' }}>
+              <h2 style={{ fontSize: '1.4rem', borderBottom: '1px solid var(--hairline)', paddingBottom: '0.5rem', fontWeight: 300, color: 'var(--ink)', marginBottom: '1rem' }}>
+                Penginapan Terdekat
+              </h2>
+              {(() => {
+                const nearbyAccommodations = (accommodations || []).filter(a => a.region === dest.location || dest.location.includes(a.region) || a.region.includes(dest.location)).slice(0, 3);
+                return nearbyAccommodations.length > 0 ? (
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem' }}>
+                    {nearbyAccommodations.map(acc => (
+                      <Link to={`/accommodations/${acc.id}`} key={acc.id} style={{ display: 'flex', gap: '1rem', padding: '1rem', border: '1px solid var(--hairline)', borderRadius: '6px', textDecoration: 'none', color: 'inherit', backgroundColor: 'var(--canvas)', transition: 'border-color 0.2s' }}>
+                        <img src={acc.image} alt={acc.name} style={{ width: '64px', height: '64px', objectFit: 'cover', borderRadius: '4px', flexShrink: 0 }} />
+                        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                          <h4 style={{ margin: '0 0 3px 0', fontSize: '0.875rem', fontWeight: 600 }}>{acc.name}</h4>
+                          <span style={{ fontSize: '0.72rem', color: 'var(--primary)', fontWeight: 600 }}>{'★'.repeat(acc.stars)} {acc.stars} Bintang</span>
+                          <span style={{ fontSize: '0.72rem', color: 'var(--ink-muted)', marginTop: '2px' }}>{acc.pricePerNight}</span>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                ) : (
+                  <p style={{ color: 'var(--ink-muted)', fontSize: '0.85rem' }}>Belum ada data penginapan terdekat untuk lokasi ini.</p>
+                );
+              })()}
+            </section>
           </div>
 
           {/* Right Sidebar Control Panel */}

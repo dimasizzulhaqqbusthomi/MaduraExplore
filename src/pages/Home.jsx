@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Search, MapPin, Calendar, Store, Compass, ArrowRight } from 'lucide-react';
+import { Search, MapPin, Calendar, Store, Compass, ArrowRight, BedDouble } from 'lucide-react';
 import { AppContext } from '../context/AppContext';
 import { DestinationCard, CulinaryCard } from '../components/CardComponents';
 
@@ -71,11 +71,12 @@ export default function Home() {
           <h2 className="text-center font-semibold mb-8" style={{ fontSize: '1.75rem', fontWeight: 300, color: 'var(--ink)', textAlign: 'center', marginBottom: '2.5rem' }}>
             Telusuri Berdasarkan Ekosistem
           </h2>
-          <div className="grid md:grid-cols-5 gap-4 text-center">
+          <div className="grid gap-4 text-center" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '1rem' }}>
             {[
               { name: 'Wisata Alam & Pantai', icon: <Compass size={24} />, path: '/destinations?cat=Alam' },
               { name: 'Kuliner Legendaris', icon: <Store size={24} />, path: '/culinary' },
               { name: 'UMKM & Batik Kreatif', icon: <Store size={24} />, path: '/msme' },
+              { name: 'Penginapan Terbaik', icon: <BedDouble size={24} />, path: '/accommodations' },
               { name: 'Acara & Festival Budaya', icon: <Calendar size={24} />, path: '/events' },
               { name: 'Peta Interaktif Lokasi', icon: <MapPin size={24} />, path: '/maps' },
             ].map(cat => (
@@ -96,8 +97,8 @@ export default function Home() {
               <h2 className="font-semibold mb-1" style={{ fontSize: '1.75rem', fontWeight: 300, color: 'var(--ink)', margin: 0 }}>Destinasi Wisata Ikonik</h2>
               <p style={{ color: 'var(--ink-muted)', fontSize: '0.9rem', margin: '4px 0 0 0' }}>Destinasi wisata unggulan paling dicari di Pulau Madura.</p>
             </div>
-            <Link to="/destinations" style={{ color: 'var(--primary)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px', textDecoration: 'none' }}>
-              Lihat Semua <ArrowRight size={16} />
+            <Link to="/destinations" style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'none' }}>
+              Lihat Semua
             </Link>
           </div>
           <div className="grid md:grid-cols-4 gap-6">
@@ -118,8 +119,8 @@ export default function Home() {
               <h2 className="font-semibold mb-1" style={{ fontSize: '1.75rem', fontWeight: 300, color: 'var(--ink)', margin: 0 }}>Rasa Nusantara Khas Madura</h2>
               <p style={{ color: 'var(--ink-muted)', fontSize: '0.9rem', margin: '4px 0 0 0' }}>Kuliner tradisional legendaris beraroma bumbu rempah yang khas.</p>
             </div>
-            <Link to="/culinary" style={{ color: 'var(--primary)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px', textDecoration: 'none' }}>
-              Lihat Semua Kuliner <ArrowRight size={16} />
+            <Link to="/culinary" style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'none' }}>
+              Lihat Semua Kuliner
             </Link>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
@@ -143,7 +144,7 @@ export default function Home() {
                   <h2 className="font-semibold mb-0" style={{ fontSize: '1.5rem', fontWeight: 300 }}>Sentra Kreatif & UMKM</h2>
                   <p style={{ fontSize: '0.85rem', color: 'var(--ink-muted)', margin: '2px 0 0 0' }}>Dukung pertumbuhan usaha ekonomi warga lokal.</p>
                 </div>
-                <Link to="/msme" style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.9rem', textDecoration: 'none' }}>Lihat Semua &rarr;</Link>
+                <Link to="/msme" style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.9rem', textDecoration: 'none' }}>Lihat Semua</Link>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 {msmes.slice(0, 3).map(msme => (
@@ -151,7 +152,7 @@ export default function Home() {
                     <img src={msme.image} alt={msme.name} style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '4px' }} />
                     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                       <h4 style={{ margin: '0 0 4px 0', fontSize: '1rem', fontWeight: 600 }}>{msme.name}</h4>
-                      <p style={{ margin: '0 0 6px 0', fontSize: '0.8rem', color: 'var(--ink-muted)' }}>📍 {msme.location}</p>
+                      <p style={{ margin: '0 0 6px 0', fontSize: '0.8rem', color: 'var(--ink-muted)' }}>{msme.location}</p>
                       <span className="badge" style={{ backgroundColor: 'var(--surface-1)', color: 'var(--primary)', padding: '2px 6px', fontSize: '0.7rem', width: 'fit-content' }}>
                         {msme.category}
                       </span>
@@ -168,7 +169,7 @@ export default function Home() {
                   <h2 className="font-semibold mb-0" style={{ fontSize: '1.5rem', fontWeight: 300 }}>Jadwal Acara Budaya</h2>
                   <p style={{ fontSize: '0.85rem', color: 'var(--ink-muted)', margin: '2px 0 0 0' }}>Saksikan kemeriahan perayaan adat tradisi Madura.</p>
                 </div>
-                <Link to="/events" style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.9rem', textDecoration: 'none' }}>Lihat Semua &rarr;</Link>
+                <Link to="/events" style={{ color: 'var(--primary)', fontWeight: 600, fontSize: '0.9rem', textDecoration: 'none' }}>Lihat Semua</Link>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 {events.slice(0, 3).map(event => (
@@ -179,7 +180,7 @@ export default function Home() {
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                       <h4 style={{ margin: '0 0 4px 0', fontSize: '1rem', fontWeight: 600 }}>{event.name}</h4>
-                      <p style={{ margin: '0 0 6px 0', fontSize: '0.8rem', color: 'var(--ink-muted)' }}>📍 {event.location}</p>
+                      <p style={{ margin: '0 0 6px 0', fontSize: '0.8rem', color: 'var(--ink-muted)' }}>{event.location}</p>
                       <span className="badge" style={{ backgroundColor: 'var(--surface-1)', color: 'var(--semantic-error)', padding: '2px 6px', fontSize: '0.7rem', width: 'fit-content' }}>
                         {event.category}
                       </span>

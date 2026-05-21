@@ -5,7 +5,7 @@ import { AppContext } from '../context/AppContext';
 
 export default function CulinaryDetail() {
   const { id } = useParams();
-  const { culinaries, destinations, toggleFavorite, isFavorite } = useContext(AppContext);
+  const { culinaries, destinations, accommodations, toggleFavorite, isFavorite } = useContext(AppContext);
 
   const cul = culinaries.find(c => c.id === parseInt(id));
 
@@ -110,11 +110,11 @@ export default function CulinaryDetail() {
               <div style={{ borderTop: '1px solid var(--hairline)', borderBottom: '1px solid var(--hairline)', padding: '1.25rem 0', margin: '1.5rem 0', display: 'flex', flexWrap: 'wrap', gap: '2rem' }}>
                 <div>
                   <div style={{ fontSize: '0.75rem', color: 'var(--ink-muted)', fontWeight: 600, marginBottom: '4px' }}>ESTIMASI HARGA</div>
-                  <div style={{ fontWeight: 600, color: 'var(--ink)', fontSize: '1.1rem' }}>💰 {cul.priceRange}</div>
+                  <div style={{ fontWeight: 600, color: 'var(--ink)', fontSize: '1.1rem' }}>{cul.priceRange}</div>
                 </div>
                 <div>
                   <div style={{ fontSize: '0.75rem', color: 'var(--ink-muted)', fontWeight: 600, marginBottom: '4px' }}>KABUPATEN UTAMA</div>
-                  <div style={{ fontWeight: 600, color: 'var(--primary)', fontSize: '1.1rem' }}>📍 {cul.location}</div>
+                  <div style={{ fontWeight: 600, color: 'var(--primary)', fontSize: '1.1rem' }}>{cul.location}</div>
                 </div>
               </div>
 
@@ -143,7 +143,7 @@ export default function CulinaryDetail() {
                       <img src={dest.image} alt={dest.name} style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '4px' }} />
                       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                         <h4 style={{ margin: '0 0 4px 0', fontSize: '0.9rem', fontWeight: 600 }}>{dest.name}</h4>
-                        <span style={{ fontSize: '0.75rem', color: 'var(--ink-muted)' }}>📍 Wisata {dest.category}</span>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--ink-muted)' }}>Wisata {dest.category}</span>
                       </div>
                     </Link>
                   ))}
@@ -151,6 +151,31 @@ export default function CulinaryDetail() {
               ) : (
                 <p style={{ color: 'var(--ink-muted)', fontSize: '0.85rem' }}>Belum ada destinasi wisata terdekat yang didaftarkan.</p>
               )}
+            </div>
+          </div>
+
+          {/* Nearby Accommodations */}
+          <div style={{ padding: '0', marginTop: '2rem' }}>
+            <div style={{ border: '1px solid var(--hairline)', borderRadius: '8px', padding: '1.5rem', backgroundColor: 'var(--canvas)' }}>
+              <h2 style={{ fontSize: '1.25rem', fontWeight: 600, marginBottom: '1rem' }}>Penginapan Terdekat</h2>
+              {(() => {
+                const region = cul.location?.split(',').pop()?.trim() || cul.location;
+                const nearbyAccommodations = (accommodations || []).filter(a => a.region === region || a.region === cul.location || cul.location?.includes(a.region)).slice(0, 3);
+                return nearbyAccommodations.length > 0 ? (
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '1rem' }}>
+                    {nearbyAccommodations.map(acc => (
+                      <Link to={`/accommodations/${acc.id}`} key={acc.id} style={{ display: 'flex', gap: '10px', padding: '10px', border: '1px solid var(--hairline)', borderRadius: '6px', textDecoration: 'none', color: 'inherit', transition: 'border-color 0.2s' }}>
+                        <img src={acc.image} alt={acc.name} style={{ width: '56px', height: '56px', objectFit: 'cover', borderRadius: '4px', flexShrink: 0 }} />
+                        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                          <p style={{ margin: '0 0 2px', fontWeight: 600, fontSize: '0.85rem', lineHeight: 1.3 }}>{acc.name}</p>
+                          <p style={{ margin: 0, fontSize: '0.72rem', color: 'var(--primary)', fontWeight: 600 }}>{'★'.repeat(acc.stars)} {acc.stars}★</p>
+                          <p style={{ margin: 0, fontSize: '0.72rem', color: 'var(--ink-muted)' }}>{acc.pricePerNight}</p>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                ) : <p style={{ color: 'var(--ink-muted)', fontSize: '0.85rem' }}>Belum ada penginapan terdekat yang tersedia.</p>;
+              })()}
             </div>
           </div>
         </div>

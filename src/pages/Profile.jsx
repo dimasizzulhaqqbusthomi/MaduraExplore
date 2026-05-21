@@ -13,6 +13,7 @@ export default function Profile() {
     msmes,
     events,
     culinaries,
+    accommodations,
     toggleFavorite,
     resetAllData
   } = useContext(AppContext);
@@ -133,11 +134,12 @@ export default function Profile() {
     else if (fav.type === 'culinary') originalItem = culinaries.find(c => c.id === fav.id);
     else if (fav.type === 'event') originalItem = events.find(e => e.id === fav.id);
     else if (fav.type === 'msme') originalItem = msmes.find(m => m.id === fav.id);
+    else if (fav.type === 'accommodation') originalItem = accommodations.find(a => a.id === fav.id);
     return originalItem ? { ...originalItem, type: fav.type } : null;
   }).filter(Boolean);
 
-  const routePrefixes = { destination: 'destinations', culinary: 'culinary', event: 'events', msme: 'msme' };
-  const typeLabels = { destination: 'Destinasi', culinary: 'Kuliner', event: 'Acara Budaya', msme: 'Toko UMKM' };
+  const routePrefixes = { destination: 'destinations', culinary: 'culinary', event: 'events', msme: 'msme', accommodation: 'accommodations' };
+  const typeLabels = { destination: 'Destinasi', culinary: 'Kuliner', event: 'Acara Budaya', msme: 'Toko UMKM', accommodation: 'Penginapan' };
 
   const displayName = user ? user.name : 'Tamu';
   const displayLocation = location || 'Lokasi belum diatur';
@@ -249,7 +251,7 @@ export default function Profile() {
                       <span className="badge" style={{ backgroundColor: 'var(--surface-1)', color: 'var(--ink)', fontSize: '0.65rem', padding: '1px 6px', borderRadius: '4px' }}>
                         {typeLabels[item.type]}
                       </span>
-                      <span>📍 Khas {item.location}</span>
+                      <span>Khas {item.location}</span>
                     </div>
                   </div>
                   <button

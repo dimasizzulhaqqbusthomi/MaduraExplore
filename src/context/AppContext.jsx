@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { destinations as initialDestinations, msmes as initialMsmes, events as initialEvents, culinaries as initialCulinaries } from '../data';
+import { destinations as initialDestinations, msmes as initialMsmes, events as initialEvents, culinaries as initialCulinaries, accommodations as initialAccommodations } from '../data';
 
 export const AppContext = createContext();
 
@@ -7,7 +7,18 @@ export function AppProvider({ children }) {
   // Load initial states from localStorage or default data
   const [destinations, setDestinations] = useState(() => {
     const saved = localStorage.getItem('me_destinations');
-    return saved ? JSON.parse(saved) : initialDestinations;
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        return parsed.map(item => {
+          const original = initialDestinations.find(d => d.id === item.id);
+          return original ? { ...original, ...item } : item;
+        });
+      } catch (e) {
+        return initialDestinations;
+      }
+    }
+    return initialDestinations;
   });
 
   const [favorites, setFavorites] = useState(() => {
@@ -99,6 +110,7 @@ export function AppProvider({ children }) {
       msmes: initialMsmes,
       events: initialEvents,
       culinaries: initialCulinaries,
+      accommodations: initialAccommodations,
       favorites,
       itinerary,
       toggleFavorite,

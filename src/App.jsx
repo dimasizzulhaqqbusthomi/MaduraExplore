@@ -15,6 +15,8 @@ import Culinary from './pages/Culinary';
 import CulinaryDetail from './pages/CulinaryDetail';
 import Planner from './pages/Planner';
 import Profile from './pages/Profile';
+import Accommodations from './pages/Accommodations';
+import AccommodationDetail from './pages/AccommodationDetail';
 
 function App() {
   return (
@@ -37,6 +39,8 @@ function App() {
             <Route path="/culinary/:id" element={<CulinaryDetail />} />
             <Route path="/planner" element={<Planner />} />
             <Route path="/itinerary" element={<Planner />} />
+            <Route path="/accommodations" element={<Accommodations />} />
+            <Route path="/accommodations/:id" element={<AccommodationDetail />} />
             <Route path="/profile" element={<Profile />} />
           </Routes>
         </main>
