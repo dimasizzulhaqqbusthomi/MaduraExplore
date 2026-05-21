@@ -18,15 +18,17 @@ export default function Navbar() {
 
   return (
     <nav className="navbar" style={{ position: 'sticky', top: 0, zIndex: 100, backgroundColor: 'var(--canvas)', borderBottom: '1px solid var(--hairline)' }}>
-      <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '64px', position: 'relative' }}>
-        {/* Brand */}
-        <Link to="/" className="nav-brand" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', fontWeight: 'bold', fontSize: '1.25rem' }}>
-          <Compass className="text-primary" size={24} />
-          Madura<span style={{ fontWeight: 'normal', color: 'var(--primary)' }}>Explore</span>
-        </Link>
+      <div className="container" style={{ display: 'flex', alignItems: 'center', height: '64px', position: 'relative' }}>
+        {/* Left Side: Brand Wrapper */}
+        <div style={{ flex: '1 1 0%', display: 'flex', justifyContent: 'flex-start' }}>
+          <Link to="/" className="nav-brand" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none', fontWeight: 'bold', fontSize: '1.25rem' }}>
+            <Compass className="text-primary" size={24} />
+            <span>Madura<span style={{ fontWeight: 'normal', color: 'var(--primary)' }}>Explore</span></span>
+          </Link>
+        </div>
         
-        {/* Desktop Navigation Links */}
-        <div style={{ display: 'flex', gap: '1.25rem' }} className="hidden md:flex">
+        {/* Center Side: Desktop Navigation Links Wrapper */}
+        <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center' }} className="hidden md:flex">
           {navLinks.map(link => (
             <Link 
               key={link.path} 
@@ -34,18 +36,32 @@ export default function Navbar() {
               className={`nav-link ${location.pathname === link.path ? 'active' : ''}`}
               style={{
                 textDecoration: 'none',
-                fontSize: '0.85rem',
+                fontSize: '0.875rem',
                 color: location.pathname === link.path ? 'var(--primary)' : 'var(--ink)',
-                fontWeight: location.pathname === link.path ? 600 : 400
+                fontWeight: location.pathname === link.path ? 600 : 400,
+                position: 'relative',
+                padding: '4px 0',
+                transition: 'color 0.2s ease'
               }}
             >
               {link.name}
+              {location.pathname === link.path && (
+                <span style={{
+                  position: 'absolute',
+                  bottom: -4,
+                  left: 0,
+                  right: 0,
+                  height: '2px',
+                  backgroundColor: 'var(--primary)',
+                  borderRadius: '2px'
+                }} />
+              )}
             </Link>
           ))}
         </div>
 
-        {/* User Icon & Hamburger Toggle */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        {/* Right Side: User Icon & Hamburger Toggle Wrapper */}
+        <div style={{ flex: '1 1 0%', display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '0.5rem' }}>
           <Link to="/profile" className="btn btn-ghost" style={{ padding: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '4px' }} title="Profil Pengguna">
             <User size={18} />
           </Link>

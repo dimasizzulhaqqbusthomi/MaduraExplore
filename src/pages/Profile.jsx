@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import { AppContext } from '../context/AppContext';
 import { User, MapPin, Heart, Clock, Trash2, ShieldAlert, LogIn, LogOut, Loader } from 'lucide-react';
 
-// ==== GANTI dengan Google Client ID Anda ====
-// Cara mendapatkan: https://console.cloud.google.com → APIs & Services → Credentials
 const GOOGLE_CLIENT_ID = '915935440183-soo3op4jnvc19b1prmcivtkc3ukpgp07.apps.googleusercontent.com';
 
 export default function Profile() {
