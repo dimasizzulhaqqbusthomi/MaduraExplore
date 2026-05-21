@@ -59,7 +59,7 @@ export function DestinationCard({ item }) {
             height: '36px', 
             display: 'flex', 
             alignItems: 'center', 
-            justify: 'center', 
+            justifyContent: 'center', 
             cursor: 'pointer',
             boxShadow: '0 2px 5px rgba(0,0,0,0.1)'
           }}
@@ -156,7 +156,7 @@ export function MSMECard({ item }) {
             height: '36px', 
             display: 'flex', 
             alignItems: 'center', 
-            justify: 'center', 
+            justifyContent: 'center', 
             cursor: 'pointer',
             boxShadow: '0 2px 5px rgba(0,0,0,0.1)'
           }}
@@ -254,7 +254,7 @@ export function EventCard({ item }) {
             height: '36px', 
             display: 'flex', 
             alignItems: 'center', 
-            justify: 'center', 
+            justifyContent: 'center', 
             cursor: 'pointer',
             boxShadow: '0 2px 5px rgba(0,0,0,0.1)'
           }}
@@ -348,7 +348,7 @@ export function CulinaryCard({ item }) {
             height: '36px', 
             display: 'flex', 
             alignItems: 'center', 
-            justify: 'center', 
+            justifyContent: 'center', 
             cursor: 'pointer',
             boxShadow: '0 2px 5px rgba(0,0,0,0.1)'
           }}
@@ -371,7 +371,7 @@ export function CulinaryCard({ item }) {
           {item.name}
         </h3>
 
-        <div style={{ fontSize: '0.8rem', color: 'var(--ink-muted)', marginBottom: '8px', fontStyle: 'italic' }}>
+        <div style={{ fontSize: '0.8rem', color: 'var(--ink-muted)', marginBottom: '8px' }}>
           💰 {item.priceRange}
         </div>
 
