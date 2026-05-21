@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient: Deep Ocean to Navy -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a2540" />
+      <stop offset="100%" stop-color="#001020" />
+    </linearGradient>
+
+    <!-- Sun Gradient: Batik Crimson Red to Warm Gold -->
+    <linearGradient id="sun-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#da1e28" />
+      <stop offset="50%" stop-color="#ff5a36" />
+      <stop offset="100%" stop-color="#ffb703" />
+    </linearGradient>
+
+    <!-- Left Sail: Batik Crimson Red -->
+    <linearGradient id="sail-left" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#da1e28" />
+      <stop offset="100%" stop-color="#800f14" />
+    </linearGradient>
+
+    <!-- Right Sail: Soft Cream to Gold -->
+    <linearGradient id="sail-right" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff8e7" />
+      <stop offset="100%" stop-color="#ffd166" />
+    </linearGradient>
+
+    <!-- Wave Gradient: Turquoise to Bright Ocean Blue -->
+    <linearGradient id="wave-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00b4d8" />
+      <stop offset="50%" stop-color="#0077b6" />
+      <stop offset="100%" stop-color="#03045e" />
+    </linearGradient>
+  </defs>
+
+  <!-- Premium Squircle Background -->
+  <rect width="512" height="512" rx="128" fill="url(#bg-grad)" />
+
+  <!-- Outer Ring (Sleek Border) -->
+  <rect x="16" y="16" width="480" height="480" rx="112" fill="none" stroke="#ffd166" stroke-width="4" stroke-opacity="0.3" />
+
+  <!-- Golden/Crimson Sun representing the East (Madura Sunrise) -->
+  <circle cx="256" cy="200" r="100" fill="url(#sun-grad)" opacity="0.9" />
+
+  <!-- The "M" Stylized Traditional Madura Sailboat (Perahu Sandeq/Jukung) -->
+  <g>
+    <!-- Left Sail (Batik Red Accent) -->
+    <path d="M 150 340 
+             C 170 230, 220 150, 235 120 
+             C 240 110, 245 110, 248 120 
+             C 252 140, 254 260, 256 340 
+             C 210 350, 170 350, 150 340 Z" 
+          fill="url(#sail-left)" />
+
+    <!-- Right Sail (Cream & Gold Accent) -->
+    <path d="M 256 340 
+             C 258 260, 260 140, 264 120 
+             C 267 110, 272 110, 277 120 
+             C 292 150, 342 230, 362 340 
+             C 342 350, 302 350, 256 340 Z" 
+          fill="url(#sail-right)" />
+
+    <!-- Sleek Boat Hull -->
+    <path d="M 120 345 
+             C 200 375, 312 375, 392 345 
+             C 370 390, 142 390, 120 345 Z" 
+          fill="#fff8e7" />
+  </g>
+
+  <!-- Flowing Ocean Waves at the base -->
+  <path d="M 64 360 
+           Q 128 340, 192 360 
+           T 320 360 
+           T 448 360 
+           L 448 448 
+           Q 320 448, 256 448 
+           T 64 448 Z" 
+        fill="url(#wave-grad)" />
+
+  <!-- Compass Star (Representing Navigation & Integration) -->
+  <path d="M 256 40 L 262 55 L 277 55 L 265 65 L 270 80 L 256 70 L 242 80 L 247 65 L 235 55 L 250 55 Z" fill="#ffd166" />
+</svg>
